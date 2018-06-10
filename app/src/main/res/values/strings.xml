@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Nyerat Aksara Sunda</string>
+
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="tittle_activity_tampilan_latihan">Tampilan Latihan</string>
+
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_about">About</string>
+
+    <string name="menu_satu">GAMPANG PISAN</string>
+    <string name="menu_dua">GAMPANG</string>
+    <string name="menu_tiga">RADA SEDENG</string>
+    <string name="menu_empat">SEDENG</string>
+    <string name="menu_lima">RADA HÉSÉ</string>
+    <string name="menu_enam">HÉSÉ</string>
+
+    <string name="best_time">Best Time</string>
+    <string name="conten">Content</string>
+    <string name="mulai">MULAI</string>
+
+    <string name="classify">CEK JAWABAN</string>
+    <string name="clear">LANJUT</string>
+    <string name="draw">Gambar Aksara Didieu</string>
+    <string name="aksarasunda">Aksara Sunda Baku (ᮃᮊ᮪ᮞᮛ ᮞᮥᮔ᮪ᮓ ᮘᮊᮥ) merupakan sistem penulisan hasil penyesuaian Aksara Sunda Kuno yang digunakan untuk menuliskan Bahasa Sunda kontemporer. Saat ini Aksara Sunda Baku juga lazim disebut dengan istilah Aksara Sunda.</string>
+    <string name="SejaraAksarasundatitle">SEJARAH AKSARA SUNDA</string>
+    <string name="isisejarah">Setidaknya sejak Abad XII masyarakat Sunda telah lama mengenal aksara untuk menuliskan bahasa yang mereka gunakan. Namun pada awal masa kolonial, masyarakat Sunda dipaksa oleh penguasa dan keadaan untuk meninggalkan penggunaan Aksara Sunda Kuno yang merupakan salah satu identitas budaya Sunda. Keadaan yang berlangsung hingga masa kemerdekaan ini menyebabkan punahnya Aksara Sunda Kuno dalam tradisi tulis masyarakat Sunda.</string>
+    <string name="kota111">KoTA 111</string>
+    <string name="hamzhya">Mohamad Hamzhya Salsatinnov Hairy</string>
+    <string name="nimhamzhya">151511017</string>
+    <string name="jihan">Mohammad Jihannudin Akhsan</string>
+    <string name="nimjihan">151511018</string>
+    <string name="natasya">Natasya Ricayani</string>
+    <string name="nimnat">151511052</string>
+
+    <string name="Version">V 01.00</string>
+
+</resources>

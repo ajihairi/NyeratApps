@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:paddingBottom="16dp"
+android:paddingLeft="16dp"
+android:paddingRight="16dp"
+android:paddingTop="16dp"
+tools:context=".activities.TampilanLatihanActivity"
+android:weightSum="1"
+android:background="@drawable/backgroundmain">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp">
+
+    <ImageButton
+        android:id="@+id/back_button"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/close_button"
+        android:background="@null"
+
+        />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true">
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/timer"
+            />
+        <TextView
+            android:id="@+id/stop_watch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="00"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    >
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_square"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="5dp"
+        >
+
+        <TextView
+            android:id="@+id/teks_soal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="50dp"
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginVertical="5dp"
+            android:text="SO"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:orientation="horizontal"
+        >
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/stars"
+            />
+        <TextView
+            android:id="@+id/total_stars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="60dp"
+            android:text="1"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="10dp"/>
+    </LinearLayout>
+
+</RelativeLayout>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/paintViewLayout"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:padding="10dp"
+    android:background="@drawable/rounded_bg"
+
+    >
+
+
+       <id.ac.polban.kota111.nyerat.PaintView
+           android:id="@+id/paintView"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"/>
+
+    <TextView
+        android:id="@+id/drawHere"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/draw"
+        android:textColor="@color/Gray"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+</RelativeLayout>
+
+<LinearLayout
+    android:id="@+id/buttonLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="15dp"
+    >
+    <Button
+        android:id="@+id/buttonClassify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/cek_jawaban_button"
+        android:text="@string/classify"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        />
+    <Button
+        android:id="@+id/buttonClear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/lanjut_button"
+        android:textColor="@color/white"
+        android:text="@string/clear"
+        android:textStyle="bold"
+        android:layout_marginLeft="25dp"/>
+
+</LinearLayout>
+
+<LinearLayout
+    android:id="@+id/textLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <EditText
+        android:id="@+id/editText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:clickable="false"
+        android:cursorVisible="true"
+        android:textCursorDrawable="@drawable/color_cursor"
+        android:backgroundTint="@color/darkblueflat"
+        android:layout_weight=".85"
+        />
+
+
+</LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

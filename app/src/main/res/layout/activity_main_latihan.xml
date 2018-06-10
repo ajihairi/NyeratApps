@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.MainLatihanActivity"
+    android:background="@drawable/backgroundmain">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="25dp"
+            android:orientation="vertical"
+            android:paddingVertical="35dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="330dp"
+                android:background="@drawable/rounded_square"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_marginTop="30dp"
+                >
+
+                <ImageView
+                    android:id="@+id/image_medal"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/medal_gold"
+                    android:layout_marginVertical="30dp"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@string/best_time"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+                <TextView
+                    android:id="@+id/teks_best_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="00:00"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+
+                <TextView
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="@string/conten"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+                <ImageView
+                    android:id="@+id/image_content_soal"
+                    android:paddingHorizontal="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/rada_hese"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:layout_marginVertical="15dp">
+                <Button
+                    android:id="@+id/button_mulai"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="@string/mulai"
+                    android:textColor="@color/flatwhite"
+                    android:textStyle="bold"
+                    android:textSize="30sp"
+                    android:background="@drawable/cek_jawaban_button"
+                    android:layout_marginBottom="10dp"/>
+                <Button
+                    android:id="@+id/button_back"
+                    android:layout_width="200dp"
+                    android:layout_height="70dp"
+                    android:text="Balik"
+                    android:textColor="@color/flatwhite"
+                    android:textStyle="bold"
+                    android:textSize="30sp"
+                    android:background="@drawable/back_button"/>
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
+</android.support.constraint.ConstraintLayout>
