@@ -28,13 +28,22 @@ public class Exercise extends RealmObject {
         this.id = id;
     }
 
-    public Medal getMedal() {
-        return Medal.valueOf(medal);
+//    public Medal getMedal() {
+//        return Medal.valueOf(medal);
+//    }
+    public String getMedal() {
+        return medal;
+    }
+    public void setMedal(String medal) {
+        this.medal = medal;
     }
 
-    public void setMedal(Medal medal) {
-        this.medal = medal.medal();
-    }
+
+//    public void setMedal(Medal medal) {
+//        this.medal = medal.medal();
+//    }
+
+
 
     public long getBestTime() {
         return bestTime;
@@ -43,4 +52,6 @@ public class Exercise extends RealmObject {
     public void setBestTime(long bestTime) {
         this.bestTime = bestTime;
     }
+
+
 }

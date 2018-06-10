@@ -1,5 +1,6 @@
 package id.ac.polban.kota111.nyerat.activities;
 
+import android.content.Intent;
 import android.media.Image;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -12,10 +13,17 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.rezkyatinnov.kyandroid.localdata.LocalData;
+import com.rezkyatinnov.kyandroid.localdata.LocalDataNotFoundException;
+import com.rezkyatinnov.kyandroid.localdata.QueryFilters;
+
+import org.w3c.dom.Text;
+
 import id.ac.polban.kota111.nyerat.R;
 
 import id.ac.polban.kota111.nyerat.AksaraClassifier;
 import id.ac.polban.kota111.nyerat.PaintView;
+import id.ac.polban.kota111.nyerat.models.ExerciseItem;
 
 public class TampilanLatihanActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,14 +34,16 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
     private PaintView paintView;
     private EditText resultText;
     private String[] currentTopLabels;
-    public TextView kontenSoal;
+    //public TextView kontenSoal;
+    public TextView TimeView;
 
     private int seconds = 0;
     private boolean startRun;
 
-    //inisialisasi variabel
-    public int scoreDidapat = 0;
-    public int soalTampil = 1;
+//
+//    //inisialisasi variabel
+//    public int scoreDidapat = 0;
+//    public int soalTampil = 1;
 
     /**
      * This is called when the application is first initialized/started. Basic setup logic is
@@ -65,30 +75,60 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
             seconds = savedInstanceState.getInt("seconds");
             startRun = savedInstanceState.getBoolean("startRun");
         }
+        kontenHandler();
         startRun = true;
         Timer();
 
         resultText = (EditText) findViewById(R.id.editText);
-        kontenSoal = (TextView) findViewById(R.id.teks_soal);
-
+//        kontenSoal = (TextView) findViewById(R.id.teks_soal);
+        TimeView = (TextView) findViewById(R.id.stop_watch);
         //getSoal(soalTampil);
 
         loadModel();
-    }
 
-    public void soal1gampangPisan() {
 
     }
 
-    public void getSoal(int a) {
-        switch (a) {
-            case 1:
-                break;
+    public void kontenHandler(){
+        Intent intent = getIntent();
+
+        String parseIdGampangPisan = intent.getExtras().getString("idGampangPisan");
+
+        TextView kontenSoal = (TextView) findViewById(R.id.teks_soal);
+
+        String idLatihan1 = "exercise1";
+        String idLatihan2 = "exercise2";
+        String idLatihan3 = "exercise3";
+        String idLatihan4 = "exercise4";
+        String idLatihan5 = "exercise5";
+        String idLatihan6 = "exercise6";
+
+        QueryFilters filterExerciseItem = new QueryFilters();
+
+        if (idLatihan1.equals(parseIdGampangPisan)){
+            filterExerciseItem.add("id", "exercise1item1");
+
+            ExerciseItem exercise1item1;
+
+            final String teksSoal;
+            final String idSoal;
+
+            try {
+                exercise1item1 = LocalData.get(filterExerciseItem, ExerciseItem.class);
+                idSoal = exercise1item1.getId();
+                teksSoal = exercise1item1.getItemText();
+
+                kontenSoal.setText(teksSoal);
+
+            } catch (LocalDataNotFoundException e) {
+                e.printStackTrace();
+            }
         }
+
     }
 
-    private void Timer() {
-        final TextView timeView = (TextView) findViewById(R.id.stop_watch);
+    public void Timer() {
+
         //final TextView  elapsedTime = (TextView)findViewById(R.id.elapsed_time);
         final Handler handler = new Handler();
         handler.post(new Runnable() {
@@ -100,7 +140,7 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
 
 //                String time = String.format("%d:%02d:%02d", hours, minutes, secs);
                 String time = String.format("%02d:%02d", minutes, secs);
-                timeView.setText(time);
+                TimeView.setText(time);
 
                 //int elapsedTimee = secs;
                 //String waktunya = String.format("waktu yang didapat %02d", elapsedTimee);
@@ -135,7 +175,6 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
                 cekJawaban();
                 paintView.reset();
                 paintView.invalidate();
-                startRun = false;
                 break;
 
             case R.id.back_button:
@@ -150,8 +189,8 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
     private void lanjut() {
         paintView.reset();
         paintView.invalidate();
-
         resultText.setText("");
+
 
     }
 
@@ -164,10 +203,11 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
         resultText.append(currentTopLabels[0]); //outputnya nanti dimasukin ke variable inputjawaban
         String inputJawaban = resultText.getText().toString();
         String kunciJawaban = "ᮟᮧ"; //string buat kunci jawaban
-        System.out.print(kunciJawaban);
         if (kunciJawaban.equals(inputJawaban)) {
             Toast.makeText(TampilanLatihanActivity.this,
                     "Jawaban Anda Benar", Toast.LENGTH_LONG).show();
+            startRun = false;
+
         } else {
             Toast.makeText(TampilanLatihanActivity.this,
                     "Jawaban Anda Salah", Toast.LENGTH_LONG).show();

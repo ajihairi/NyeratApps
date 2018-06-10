@@ -17,32 +17,33 @@ public class DataInitiator {
         Exercise exercise6  =   new Exercise();
 
         exercise1.setId("exercise1");
-        exercise1.setMedal(Medal.BELUMADA);
+//        exercise1.setMedal(Medal.BELUMADA);
+        exercise1.setMedal("BELUM ADA");
         exercise1.setBestTime(0);
         LocalData.saveOrUpdate(exercise1);
 
         exercise2.setId("exercise2");
-        exercise2.setMedal(Medal.BELUMADA);
+        exercise2.setMedal("BELUM ADA");
         exercise2.setBestTime(0);
         LocalData.saveOrUpdate(exercise2);
 
         exercise3.setId("exercise3");
-        exercise3.setMedal(Medal.BELUMADA);
+        exercise3.setMedal("BELUM ADA");
         exercise3.setBestTime(0);
         LocalData.saveOrUpdate(exercise3);
 
         exercise4.setId("exercise4");
-        exercise4.setMedal(Medal.BELUMADA);
+        exercise4.setMedal("BELUM ADA");
         exercise4.setBestTime(0);
         LocalData.saveOrUpdate(exercise4);
 
         exercise5.setId("exercise5");
-        exercise5.setMedal(Medal.BELUMADA);
+        exercise5.setMedal("BELUM ADA");
         exercise5.setBestTime(0);
         LocalData.saveOrUpdate(exercise5);
 
         exercise6.setId("exercise6");
-        exercise6.setMedal(Medal.BELUMADA);
+        exercise6.setMedal("NULL");
         exercise6.setBestTime(0);
         LocalData.saveOrUpdate(exercise6);
 
@@ -65,25 +66,6 @@ public class DataInitiator {
         exercise1Item1.setItemText("A");
         exercise1Item1.setItemAnswer("ᮃ");
         LocalData.saveOrUpdate(exercise1Item1);
-
-        //pengecekan dan ambil data
-        /*
-        try {
-            QueryFilters filters = new QueryFilters();
-            filters.add("id", "exercise1item1");
-            exercise1Item1 = LocalData.get(filters , ExerciseItem.class);
-
-           // System.out.print(exercise1Item1.getItemNo()); //nampilin dan get
-           System.out.print(exercise1Item1.getId());
-           System.out.print(exercise1Item1.getItemText(););
-           System.out.print(exercise1Item1.getItemAnswer(););
-           exercise1Item1.getStars()
-           exercise1Item1.getTimeElapsed()
-        } catch (LocalDataNotFoundException e) {
-
-            e.printStackTrace();
-        }
-        */
 
         exercise1Item2.setId("exercise1item2");
         exercise1Item2.setItemNo(2);
