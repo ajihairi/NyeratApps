@@ -93,36 +93,97 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
         Intent intent = getIntent();
 
         String parseIdGampangPisan = intent.getExtras().getString("idGampangPisan");
+        String parseIdGampang = intent.getExtras().getString("idGampang");
+        String parseIdRadaSedeng = intent.getExtras().getString("idRadaSedeng");
+
+        String parseIdSedeng = intent.getExtras().getString("idSedeng");
+        String parseIdRadaHese = intent.getExtras().getString("idRadaHese");
+
+        String parseIdHese = intent.getExtras().getString("idHese");
 
         TextView kontenSoal = (TextView) findViewById(R.id.teks_soal);
 
-        String idLatihan1 = "exercise1";
-        String idLatihan2 = "exercise2";
-        String idLatihan3 = "exercise3";
-        String idLatihan4 = "exercise4";
-        String idLatihan5 = "exercise5";
-        String idLatihan6 = "exercise6";
+        final String teksSoal;
+        final String idSoal;
+        final String teksJawaban;
+
+        ExerciseItem exerciseItem;
 
         QueryFilters filterExerciseItem = new QueryFilters();
 
-        if (idLatihan1.equals(parseIdGampangPisan)){
+        if (parseIdGampangPisan != null){
             filterExerciseItem.add("id", "exercise1item1");
 
-            ExerciseItem exercise1item1;
-
-            final String teksSoal;
-            final String idSoal;
-
             try {
-                exercise1item1 = LocalData.get(filterExerciseItem, ExerciseItem.class);
-                idSoal = exercise1item1.getId();
-                teksSoal = exercise1item1.getItemText();
+                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
+                idSoal = exerciseItem.getId();
+                teksSoal = exerciseItem.getItemText();
 
                 kontenSoal.setText(teksSoal);
 
             } catch (LocalDataNotFoundException e) {
                 e.printStackTrace();
             }
+        } else if(parseIdGampang != null){
+            filterExerciseItem.add("id", "exercise2item1");
+
+
+            try {
+                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
+                teksSoal = exerciseItem.getItemText();
+
+                kontenSoal.setText(teksSoal);
+            } catch (LocalDataNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        } else if (parseIdRadaSedeng != null){
+            filterExerciseItem.add("id", "exercise3item1");
+            try {
+                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
+                teksSoal = exerciseItem.getItemText();
+
+                kontenSoal.setText(teksSoal);
+            } catch (LocalDataNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }else if (parseIdSedeng != null){
+            filterExerciseItem.add("id", "exercise4item1");
+
+            try {
+                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
+                teksSoal = exerciseItem.getItemText();
+
+                kontenSoal.setText(teksSoal);
+            } catch (LocalDataNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }else if (parseIdRadaHese != null){
+            filterExerciseItem.add("id", "exercise5item1");
+
+            try {
+                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
+                teksSoal = exerciseItem.getItemText();
+
+                kontenSoal.setText(teksSoal);
+            } catch (LocalDataNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }else  if (parseIdHese != null){
+            filterExerciseItem.add("id", "exercise6item1");
+
+            try {
+                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
+                teksSoal = exerciseItem.getItemText();
+
+                kontenSoal.setText(teksSoal);
+            } catch (LocalDataNotFoundException e) {
+                e.printStackTrace();
+            }
+
         }
 
     }
@@ -190,8 +251,6 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
         paintView.reset();
         paintView.invalidate();
         resultText.setText("");
-
-
     }
 
     /**

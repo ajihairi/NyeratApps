@@ -1,6 +1,7 @@
 package id.ac.polban.kota111.nyerat.activities;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -203,22 +204,37 @@ public class MainLatihanActivity extends AppCompatActivity implements View.OnCli
 
         String parseIdRadaSedeng = intent.getExtras().getString("idRadaSedeng");
 
-        String parseIdSedeng= intent.getExtras().getString("idSedeng");
+        String parseIdSedeng = intent.getExtras().getString("idSedeng");
         String parseIdRadaHese = intent.getExtras().getString("idRadaHese");
 
         String parseIdHese = intent.getExtras().getString("idHese");
 
 
-        //deklarasi string sbg pembanding
-        String idLatihan1 = "exercise1";
-        String idLatihan2 = "exercise2";
-        String idLatihan3 = "exercise3";
-        String idLatihan4 = "exercise4";
-        String idLatihan5 = "exercise5";
-        String idLatihan6 = "exercise6";
 
-        Intent intentGampangPisan = new Intent(this, TampilanLatihanActivity.class);
-        intentGampangPisan.putExtra("idGampangPisan", parseIdGampangPisan);
-        startActivity(intentGampangPisan);
+        if (parseIdGampangPisan != null) {
+            Intent intentGampangPisan = new Intent(this, TampilanLatihanActivity.class);
+            intentGampangPisan.putExtra("idGampangPisan", parseIdGampangPisan);
+            startActivity(intentGampangPisan);
+        } else if (parseIdGampang != null){
+            Intent intentGampang = new Intent(this, TampilanLatihanActivity.class);
+            intentGampang.putExtra("idGampang", parseIdGampang);
+            startActivity(intentGampang);
+        } else if (parseIdRadaSedeng != null){
+            Intent intentRadaSedeng = new Intent(this, TampilanLatihanActivity.class);
+            intentRadaSedeng.putExtra("idRadaSedeng", parseIdRadaSedeng);
+            startActivity(intentRadaSedeng);
+        }else if (parseIdSedeng != null){
+            Intent intentSedeng = new Intent(this, TampilanLatihanActivity.class);
+            intentSedeng.putExtra("idSedeng", parseIdSedeng);
+            startActivity(intentSedeng);
+        }else if (parseIdRadaHese != null){
+            Intent intentRadaHese = new Intent(this, TampilanLatihanActivity.class);
+            intentRadaHese.putExtra("idRadaHese", parseIdRadaHese);
+            startActivity(intentRadaHese);
+        }else if (parseIdHese != null){
+            Intent intentHese = new Intent(this, TampilanLatihanActivity.class);
+            intentHese.putExtra("idHese", parseIdHese);
+            startActivity(intentHese);
+        }
     }
 }
