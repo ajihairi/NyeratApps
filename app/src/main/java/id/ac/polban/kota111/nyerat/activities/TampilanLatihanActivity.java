@@ -19,11 +19,17 @@ import com.rezkyatinnov.kyandroid.localdata.QueryFilters;
 
 import org.w3c.dom.Text;
 
+import java.util.List;
+
 import id.ac.polban.kota111.nyerat.R;
 
 import id.ac.polban.kota111.nyerat.AksaraClassifier;
 import id.ac.polban.kota111.nyerat.PaintView;
+import id.ac.polban.kota111.nyerat.enums.Medal;
+import id.ac.polban.kota111.nyerat.models.Exercise;
 import id.ac.polban.kota111.nyerat.models.ExerciseItem;
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class TampilanLatihanActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -36,10 +42,24 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
     private String[] currentTopLabels;
     //public TextView kontenSoal;
     public TextView TimeView;
+    public TextView SkorView;
 
     private int seconds = 0;
     private boolean startRun;
 
+    String idExercise;
+    String kunciJawaban;
+    int itemNo;
+
+    Exercise exercise;
+    ExerciseItem exerciseItem;
+
+
+    TextView kontenSoal;
+    TextView drawHereText;
+    Button clearButton;
+    Button classifyButton;
+    ImageButton backButton;
 //
 //    //inisialisasi variabel
 //    public int scoreDidapat = 0;
@@ -57,31 +77,26 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_tampilan_latihan);
 
-        paintView = (PaintView) findViewById(R.id.paintView);
-
-        TextView drawHereText = (TextView) findViewById(R.id.drawHere);
-        paintView.setDrawText(drawHereText);
-
-        Button clearButton = (Button) findViewById(R.id.buttonClear);
-        clearButton.setOnClickListener(this);
-
-        Button classifyButton = (Button) findViewById(R.id.buttonClassify);
-        classifyButton.setOnClickListener(this);
-
-        ImageButton backButton = (ImageButton) findViewById(R.id.back_button);
-        backButton.setOnClickListener(this);
-
         if (savedInstanceState != null) {
             seconds = savedInstanceState.getInt("seconds");
             startRun = savedInstanceState.getBoolean("startRun");
         }
-        kontenHandler();
+
+        Intent intent = getIntent();
+        idExercise = intent.getExtras().getString("exerciseID");
+        itemNo = intent.getExtras().getInt("itemNo");
+
+        initView();
+        init();
+
+//        kontenHandler();
         startRun = true;
         Timer();
 
         resultText = (EditText) findViewById(R.id.editText);
 //        kontenSoal = (TextView) findViewById(R.id.teks_soal);
         TimeView = (TextView) findViewById(R.id.stop_watch);
+        SkorView = findViewById(R.id.teks_skor);
         //getSoal(soalTampil);
 
         loadModel();
@@ -89,101 +104,46 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
 
     }
 
-    public void kontenHandler(){
-        Intent intent = getIntent();
+    private void initView(){
 
-        String parseIdGampangPisan = intent.getExtras().getString("idGampangPisan");
-        String parseIdGampang = intent.getExtras().getString("idGampang");
-        String parseIdRadaSedeng = intent.getExtras().getString("idRadaSedeng");
+        kontenSoal = (TextView) findViewById(R.id.teks_soal);
+        paintView = (PaintView) findViewById(R.id.paintView);
 
-        String parseIdSedeng = intent.getExtras().getString("idSedeng");
-        String parseIdRadaHese = intent.getExtras().getString("idRadaHese");
+        drawHereText = (TextView) findViewById(R.id.drawHere);
+        paintView.setDrawText(drawHereText);
 
-        String parseIdHese = intent.getExtras().getString("idHese");
+        clearButton = (Button) findViewById(R.id.buttonClear);
+        clearButton.setOnClickListener(this);
 
-        TextView kontenSoal = (TextView) findViewById(R.id.teks_soal);
+        classifyButton = (Button) findViewById(R.id.buttonClassify);
+        classifyButton.setOnClickListener(this);
 
-        final String teksSoal;
-        final String idSoal;
-        final String teksJawaban;
+        backButton = (ImageButton) findViewById(R.id.back_button);
+        backButton.setOnClickListener(this);
+    }
 
-        ExerciseItem exerciseItem;
+    private void init(){
+        QueryFilters filters = new QueryFilters();
+        filters.add("id", idExercise); //filter id
 
-        QueryFilters filterExerciseItem = new QueryFilters();
-
-        if (parseIdGampangPisan != null){
-            filterExerciseItem.add("id", "exercise1item1");
-
-            try {
-                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
-                idSoal = exerciseItem.getId();
-                teksSoal = exerciseItem.getItemText();
-
-                kontenSoal.setText(teksSoal);
-
-            } catch (LocalDataNotFoundException e) {
-                e.printStackTrace();
-            }
-        } else if(parseIdGampang != null){
-            filterExerciseItem.add("id", "exercise2item1");
+        try {
+            exercise = LocalData.get(filters, Exercise.class);
 
 
-            try {
-                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
-                teksSoal = exerciseItem.getItemText();
+            filters = new QueryFilters();
+            filters.add("itemNo", itemNo); //filter id
+            List<ExerciseItem> exerciseItems = LocalData.getList(filters, ExerciseItem.class);
 
-                kontenSoal.setText(teksSoal);
-            } catch (LocalDataNotFoundException e) {
-                e.printStackTrace();
+            for(ExerciseItem item:exerciseItems){
+                if(item.getExercise().getId().equalsIgnoreCase(idExercise)) {
+                    exerciseItem = item;
+                    kontenSoal.setText(exerciseItem.getItemText());
+                    kunciJawaban = exerciseItem.getItemAnswer();
+                }
             }
 
-        } else if (parseIdRadaSedeng != null){
-            filterExerciseItem.add("id", "exercise3item1");
-            try {
-                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
-                teksSoal = exerciseItem.getItemText();
-
-                kontenSoal.setText(teksSoal);
-            } catch (LocalDataNotFoundException e) {
-                e.printStackTrace();
-            }
-
-        }else if (parseIdSedeng != null){
-            filterExerciseItem.add("id", "exercise4item1");
-
-            try {
-                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
-                teksSoal = exerciseItem.getItemText();
-
-                kontenSoal.setText(teksSoal);
-            } catch (LocalDataNotFoundException e) {
-                e.printStackTrace();
-            }
-
-        }else if (parseIdRadaHese != null){
-            filterExerciseItem.add("id", "exercise5item1");
-
-            try {
-                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
-                teksSoal = exerciseItem.getItemText();
-
-                kontenSoal.setText(teksSoal);
-            } catch (LocalDataNotFoundException e) {
-                e.printStackTrace();
-            }
-
-        }else  if (parseIdHese != null){
-            filterExerciseItem.add("id", "exercise6item1");
-
-            try {
-                exerciseItem = LocalData.get(filterExerciseItem, ExerciseItem.class);
-                teksSoal = exerciseItem.getItemText();
-
-                kontenSoal.setText(teksSoal);
-            } catch (LocalDataNotFoundException e) {
-                e.printStackTrace();
-            }
-
+        } catch (LocalDataNotFoundException e) {
+            e.printStackTrace();
         }
 
     }
@@ -231,6 +191,13 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
                 lanjut();
                 startRun = true;
                 seconds = 0;
+                itemNo =itemNo+1;
+                if(itemNo>10){
+                    countMedal();
+                    finish();
+                }else {
+                    init();
+                }
                 break;
             case R.id.buttonClassify:
                 cekJawaban();
@@ -261,10 +228,13 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
         currentTopLabels = classifier.classify(pixels);
         resultText.append(currentTopLabels[0]); //outputnya nanti dimasukin ke variable inputjawaban
         String inputJawaban = resultText.getText().toString();
-        String kunciJawaban = "ᮟᮧ"; //string buat kunci jawaban
         if (kunciJawaban.equals(inputJawaban)) {
             Toast.makeText(TampilanLatihanActivity.this,
                     "Jawaban Anda Benar", Toast.LENGTH_LONG).show();
+            exerciseItem.setTimeElapsed(seconds);
+            exerciseItem.setStars(countStars(seconds));
+
+            LocalData.saveOrUpdate(exerciseItem);
             startRun = false;
 
         } else {
@@ -274,6 +244,38 @@ public class TampilanLatihanActivity extends AppCompatActivity implements View.O
 
     }
 
+    protected int countStars(long seconds){
+        if (seconds <= 30 ){
+            return 2;
+        } else {
+            return 1;
+        }
+    }
+
+    protected void countMedal(){
+        try {
+            QueryFilters filters = new QueryFilters();
+            filters.add("exercise.id", idExercise); //filter id
+            List<ExerciseItem> exerciseItems = LocalData.getList(filters, ExerciseItem.class);
+
+            int countStars = 0;
+            long bestTime = 999999999;
+            for(ExerciseItem item:exerciseItems){
+                countStars = countStars + item.getStars();
+                if(item.getTimeElapsed()>0 && item.getTimeElapsed()<bestTime){
+                    bestTime = item.getTimeElapsed();
+                }
+            }
+
+            exercise.setMedal(countStars>16?Medal.GOLD:countStars>10?Medal.SILVER:Medal.BRONZE);
+            exercise.setBestTime(bestTime);
+
+            LocalData.saveOrUpdate(exercise);
+
+        } catch (LocalDataNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override

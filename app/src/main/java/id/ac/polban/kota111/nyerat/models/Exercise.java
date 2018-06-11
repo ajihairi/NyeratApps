@@ -28,20 +28,19 @@ public class Exercise extends RealmObject {
         this.id = id;
     }
 
-//    public Medal getMedal() {
-//        return Medal.valueOf(medal);
-//    }
-    public String getMedal() {
-        return medal;
-    }
-    public void setMedal(String medal) {
-        this.medal = medal;
+    public Medal getMedal() {
+        for(Medal v : Medal.values()){
+            if( v.medal().equals(medal)){
+                return v;
+            }
+        }
+        return null;
     }
 
 
-//    public void setMedal(Medal medal) {
-//        this.medal = medal.medal();
-//    }
+    public void setMedal(Medal medal) {
+        this.medal = medal.medal();
+    }
 
 
 

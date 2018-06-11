@@ -1,7 +1,7 @@
 package id.ac.polban.kota111.nyerat.enums;
 
 public enum Medal {
-    GOLD("GOLD"),SILVER("SILVER"),BRONZE("BRONZE"), BELUMADA("BELUM ADA");
+    GOLD("GOLD"),SILVER("SILVER"),BRONZE("BRONZE"), BELUMADA("BELUMADA");
 
     private String medal;
 
